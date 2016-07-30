@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间有特殊的用途 -->
+<mapper namespace="test">
+
+<!--
+从数据库中查找一个条目。
+#{}表示一个占位符.
+parameterType：表示输入参数的类型，即sql语句中#{username}中的username的类型。
+resultType：表示执行语句后返回对象的类型。 
+ -->
+<select id="findUserByUsername" parameterType="String" resultType="wzd.pkg.po.User">
+	SELECT * FROM USER WHERE username=#{username}
+</select>
+
+<!-- 
+从数据库中删除一个条目。
+ -->
+<delete id="deleteUserByUsername" parameterType="string">
+	delete from user where username=#{username}
+</delete>
+
+<!-- 
+插入一个条目到数据库中。
+#{userid},#{username},#{password}：分别表示wzdpkg.po.User类中的属性userid、username、password。
+ -->
+<insert id="insertUser" parameterType="wzd.pkg.po.User">
+	insert into user (userid,username,password) values(#{userid},#{username},#{password})
+</insert>
+
+</mapper>
